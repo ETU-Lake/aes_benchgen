@@ -22,6 +22,7 @@ static const uint8_t test_key [16] = {
 /*
  * plain: "qwertyuiopasdfgh"
  * ascii in little endian
+ * used in consistency check only.
  */
 static const uint8_t test_plain [16] = {
     0x71, 0x77, 0x65, 0x72,
@@ -45,7 +46,7 @@ static void test_internal(void) {
 static void test_keyexpand(void) {
     aes_ctx ctx;
     size_t i;
-    printf("Generating Key Expansion test vector:\n");
+    printf("Generating KeyExpansion test vector:\n");
     key_expansion(&ctx, test_key);
     for (i = 0; i < 127; i++) {
         printf("0x%X ", (ctx.roundkey)[i]);
@@ -103,11 +104,10 @@ void test_eval(uint8_t opts) {
     }
     printf("\n");
 
-    printf("Test Plaintext/State (\"qwertyuiopasdfgh\" in ASCII, little endian):\n");
-    for (i = 0; i < 16; i++) {
-        printf("0x%X ", test_plain[i]);
-    }
-    printf("\n");
+
+    printf("Test State:\n");
+    self_aes_test_ctx_gen(&ctx, test_key);
+    PRINT_STATE((&ctx));
 
     if (opts & INTERNAL) {
         test_internal();
