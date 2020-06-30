@@ -1,15 +1,15 @@
 cmake_minimum_required(VERSION 3.13)
-project(aes_benchgen)
+project(aes_benchgen C)
 
 set(CMAKE_C_FLAGS_DEBUG "")
 set(CMAKE_C_FLAGS_RELEASE "")
 set(CMAKE_C_FLAGS_RELWITHDEBINFO "")
 set(CMAKE_C_FLAGS_MINSIZEREL "")
 
-set(BASE_COMPILE_OPTIONS -pipe -march=native -fcf-protection=full -fstack-protector-strong)
+set(BASE_COMPILE_OPTIONS -pipe -march=native -mtune=native -fcf-protection=full -fstack-protector-strong)
 set(WARNINGS -Wall -Wextra -Wpedantic -Wuninitialized -Wundef -Wcast-align -Wstrict-overflow=2 -Wwrite-strings -Wno-format-nonliteral)
 set(DEBUG_OPTIONS ${BASE_COMPILE_OPTIONS} -ggdb -g3 -O0)
-set(RELEASE_OPTIONS ${BASE_COMPILE_OPTIONS} -O3)
+set(RELEASE_OPTIONS ${BASE_COMPILE_OPTIONS} -Ofast -funsafe-math-optimizations -funroll-loops -fshort-enums)
 
 set(CMAKE_C_STANDARD 99)
 

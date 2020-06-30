@@ -6,6 +6,7 @@ typedef struct aes_ctx__ {
 } aes_ctx;
 
 void key_expansion(aes_ctx * restrict ctx, const uint8_t key[static restrict 16]);
+void on_the_fly_key_expansion(uint8_t expanded[static restrict 4], const uint8_t key[static restrict 16], const size_t round_number);
 void subbytes(aes_ctx * restrict ctx);
 void shift_rows(aes_ctx * restrict ctx);
 void mix_columns(aes_ctx * restrict ctx);

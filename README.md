@@ -3,6 +3,14 @@ A simple program to create test vectors for the Digital Design (BIL264) AES proj
 Utilizes both OpenSSL and a homebrew AES adaptation of tiny-aes-c for failure-control. It is recommended that you
 run the internal test at all times.
 
+## Building
+* `cmake -DCMAKE_BUILD_TYPE=Debug .`
+    * Almost guaranteed to work and suitable for debugging.
+* `cmake -DCMAKE_BUILD_TYPE=Release .`
+    * Aggresive optmization but it will still work.
+
+There really isn't much point in using the `Release` build type apart from amusement. Both take almost no time to run.
+
 ## Usage
 ```
 aes_benchgen - generate test vectors
@@ -20,7 +28,7 @@ No arguments run all tests
 ```
 
 ## License
-This repository is licenced under BSD-3-Clause. Refer to
+This repository is licenced under the BSD-3-Clause. Refer to
 LICENSE.md for more details.
 
 ## Credits

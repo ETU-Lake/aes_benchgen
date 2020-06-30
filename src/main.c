@@ -30,14 +30,14 @@ int main(int argc, char **argv) {
     int option;
     struct optparse opts;
     struct optparse_long longopts[] = {
-        {"internal", 'i', OPTPARSE_NONE},
-        {"keyexpand", 'k', OPTPARSE_NONE},
-        {"addroundkey", 'a', OPTPARSE_NONE},
-        {"subbytes", 's', OPTPARSE_NONE},
-        {"Shiftrows", 'S', OPTPARSE_NONE},
-        {"mixcolumns", 'm', OPTPARSE_NONE},
-        {"cipher", 'c', OPTPARSE_NONE},
-        {"help", 'h', OPTPARSE_NONE},
+        { "internal",    'i', OPTPARSE_NONE },
+        { "keyexpand",   'k', OPTPARSE_NONE },
+        { "addroundkey", 'a', OPTPARSE_NONE },
+        { "subbytes",    's', OPTPARSE_NONE },
+        { "Shiftrows",   'S', OPTPARSE_NONE },
+        { "mixcolumns",  'm', OPTPARSE_NONE },
+        { "cipher",      'c', OPTPARSE_NONE },
+        { "help",        'h', OPTPARSE_NONE },
         {0}
     };
 
@@ -75,8 +75,7 @@ int main(int argc, char **argv) {
     }
 
     if (!mode || argc == 1) {
-        mode = INTERNAL | KEYEXPAND | ADDROUNDKEY | SUBBYTES
-             | SHIFTROWS | MIXCOLUMNS | CIPHER;
+        mode = 0xFF;
     }
 
     test_eval(mode);

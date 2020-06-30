@@ -32,14 +32,14 @@ static const uint8_t test_plain [16] = {
 
 static void test_internal(void) {
     uint8_t openssl_cipher[16], self_cipher[16], tmp[16];
-    printf("Testing internal consistency\n");
-    TEST(openssl_aes_encrypt(openssl_cipher, test_plain, test_key), 1, "Encrypting with OpenSSL");
-    TEST(openssl_aes_decrypt(tmp, openssl_cipher, test_key), 1, "Decrypting with OpenSSL");
-    TEST(CRYPTO_memcmp(tmp, test_plain, 16), 0, "Checking decryption results");
+    printf("Testing internal consistency...\n");
+    TEST(openssl_aes_encrypt(openssl_cipher, test_plain, test_key), 1, "encryptiion via OpenSSL");
+    TEST(openssl_aes_decrypt(tmp, openssl_cipher, test_key), 1, "decryption via OpenSSL");
+    TEST(CRYPTO_memcmp(tmp, test_plain, 16), 0, "decryption result consistency");
     printf(" * Encrypting via self AES...\n");
     self_aes_encrypt(self_cipher, test_plain, test_key);
-    TEST(CRYPTO_memcmp(openssl_cipher, self_cipher, 16), 0, "Comparing ciphertext results");
-    printf("INTERNAL CONSISTENCY OK\n");
+    TEST(CRYPTO_memcmp(openssl_cipher, self_cipher, 16), 0, "ciphertext result consistency");
+    printf("Internal consistency is OK.\n");
 }
 
 static void test_keyexpand(void) {
@@ -94,7 +94,20 @@ static void test_cipher(void) {
 
 
 void test_eval(uint8_t opts) {
+    size_t i;
     aes_ctx ctx;
+
+    printf("Test Key (\"expand 32-byte k\" in ASCII, little endian):\n");
+    for (i = 0; i < 16; i++) {
+        printf("0x%X ", test_key[i]);
+    }
+    printf("\n");
+
+    printf("Test Plaintext/State (\"qwertyuiopasdfgh\" in ASCII, little endian):\n");
+    for (i = 0; i < 16; i++) {
+        printf("0x%X ", test_plain[i]);
+    }
+    printf("\n");
 
     if (opts & INTERNAL) {
         test_internal();
@@ -127,5 +140,4 @@ void test_eval(uint8_t opts) {
     if (opts & CIPHER) {
         test_cipher();
     }
-
 }

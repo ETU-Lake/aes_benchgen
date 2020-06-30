@@ -9,7 +9,7 @@
 int openssl_aes_encrypt(uint8_t out[static restrict 16],
                         const uint8_t plain[static restrict 16],
                         const uint8_t key[static restrict 16]) {
-    int out_len;
+    int out_len = -1;
     EVP_CIPHER_CTX *ctx = NULL;
 
     if (!plain || !key) {
@@ -39,6 +39,7 @@ int openssl_aes_encrypt(uint8_t out[static restrict 16],
 
     EVP_CIPHER_CTX_free(ctx);
     return 1;
+
 FAULT:
     OPENSSL_cleanse(out, 16);
     if (ctx) {
@@ -50,7 +51,7 @@ FAULT:
 int openssl_aes_decrypt(uint8_t out[static restrict 16],
                         const uint8_t cipher[static restrict 16],
                         const uint8_t key[static restrict 16]) {
-    int out_len;
+    int out_len = -1;
     EVP_CIPHER_CTX *ctx = NULL;
 
     if (!cipher || !key ) {
