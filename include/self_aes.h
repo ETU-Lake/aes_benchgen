@@ -5,12 +5,11 @@ typedef struct aes_ctx__ {
     uint8_t state[4][4];
 } aes_ctx;
 
-void key_expansion(aes_ctx * restrict ctx, const uint8_t key[static restrict 16]);
-void on_the_fly_key_expansion(uint8_t expanded[static restrict 4], const uint8_t key[static restrict 16], const size_t round_number);
+void keyexpansion(aes_ctx * restrict ctx, const uint8_t key[static restrict 16]);
 void subbytes(aes_ctx * restrict ctx);
-void shift_rows(aes_ctx * restrict ctx);
-void mix_columns(aes_ctx * restrict ctx);
-void add_roundkey(aes_ctx * restrict ctx, size_t round_num);
+void shiftrows(aes_ctx * restrict ctx);
+void mixcolumns(aes_ctx * restrict ctx);
+void addroundkey(aes_ctx * restrict ctx, size_t round_num);
 void self_aes_encrypt(uint8_t out[static restrict 16],
                       const uint8_t plain[static restrict 16],
                       const uint8_t key[static restrict 16]);

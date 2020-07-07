@@ -31,7 +31,7 @@ static const uint8_t sbox [256] = {
 
 static const uint8_t rcon[11] = { 0x8D, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1B, 0x36 };
 
-void key_expansion(aes_ctx * restrict ctx, const uint8_t key[static restrict 16]) {
+void keyexpansion(aes_ctx * restrict ctx, const uint8_t key[static restrict 16]) {
     size_t i, j, k;
     uint8_t tmp[4], tmp2;
 
@@ -64,7 +64,9 @@ void key_expansion(aes_ctx * restrict ctx, const uint8_t key[static restrict 16]
             tmp[0] ^= rcon[i/4];
         }
  
-        j = i * 4; k=(i - 4) * 4;
+        j = i*4;
+        k=(i-4)*4;
+
         (ctx->roundkey)[j + 0] = (ctx->roundkey)[k + 0] ^ tmp[0];
         (ctx->roundkey)[j + 1] = (ctx->roundkey)[k + 1] ^ tmp[1];
         (ctx->roundkey)[j + 2] = (ctx->roundkey)[k + 2] ^ tmp[2];
@@ -82,7 +84,7 @@ void subbytes(aes_ctx * restrict ctx) {
     }
 }
 
-void shift_rows(aes_ctx * restrict ctx) {
+void shiftrows(aes_ctx * restrict ctx) {
     uint8_t tmp;
 
     /* 1st row 1 col to left. */
@@ -108,7 +110,7 @@ void shift_rows(aes_ctx * restrict ctx) {
     (ctx->state)[1][3] = tmp;
 }
 
-void mix_columns(aes_ctx * restrict ctx) {
+void mixcolumns(aes_ctx * restrict ctx) {
     uint8_t tmp1, tmp2, tmp3;
     size_t i;
 
@@ -134,7 +136,7 @@ void mix_columns(aes_ctx * restrict ctx) {
     }
 }
 
-void add_roundkey(aes_ctx * restrict ctx, size_t round_num) {
+void addroundkey(aes_ctx * restrict ctx, size_t round_num) {
     size_t i, j;
 
     for (i = 0; i < 4; i++) {
@@ -147,7 +149,7 @@ void add_roundkey(aes_ctx * restrict ctx, size_t round_num) {
 void self_aes_test_ctx_gen(aes_ctx * restrict ctx, const uint8_t key[static restrict 16]) {
     size_t i, j;
 
-    key_expansion(ctx, key);
+    keyexpansion(ctx, key);
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
@@ -168,19 +170,19 @@ void self_aes_encrypt(uint8_t out[static restrict 16],
         }
     }
 
-    key_expansion(&ctx, key);
-    add_roundkey(&ctx, 0);
+    keyexpansion(&ctx, key);
+    addroundkey(&ctx, 0);
 
     for (i = 1; i < 10; i++) {
         subbytes(&ctx);
-        shift_rows(&ctx);
-        mix_columns(&ctx);
-        add_roundkey(&ctx, i);
+        shiftrows(&ctx);
+        mixcolumns(&ctx);
+        addroundkey(&ctx, i);
     }
 
     subbytes(&ctx);
-    shift_rows(&ctx);
-    add_roundkey(&ctx, 10);
+    shiftrows(&ctx);
+    addroundkey(&ctx, 10);
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
