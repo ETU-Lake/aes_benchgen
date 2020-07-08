@@ -48,7 +48,7 @@ static void test_keyexpand(void) {
     size_t i;
     printf("Generating KeyExpansion test vector:\n");
     keyexpansion(&ctx, test_key);
-    for (i = 0; i < 127; i++) {
+    for (i = 0; i < 176; i++) {
         printf("0x%X ", (ctx.roundkey)[i]);
         if (i % 16 == 15) {
             printf("\n");
