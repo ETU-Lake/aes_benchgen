@@ -153,7 +153,7 @@ void self_aes_test_ctx_gen(aes_ctx * restrict ctx, const uint8_t key[static rest
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 4; j++) {
-            (ctx->state)[i][j] = 4*i+j;
+            (ctx->state)[i][j] = 4*j+i;
         }
     }
 }
