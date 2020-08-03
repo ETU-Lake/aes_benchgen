@@ -63,9 +63,9 @@ void keyexpansion(aes_ctx * restrict ctx, const uint8_t key[static restrict 16])
 
             tmp[0] ^= rcon[i/4];
         }
- 
+
         j = i*4;
-        k=(i-4)*4;
+        k = (i-4)*4;
 
         (ctx->roundkey)[j + 0] = (ctx->roundkey)[k + 0] ^ tmp[0];
         (ctx->roundkey)[j + 1] = (ctx->roundkey)[k + 1] ^ tmp[1];
@@ -131,7 +131,7 @@ void mixcolumns(aes_ctx * restrict ctx) {
         (ctx->state)[i][2] ^= tmp2 ^ tmp3;
 
         tmp3 = (ctx->state)[i][3] ^ tmp1;
-        tmp3 = ((tmp3<<1) ^ (((tmp3>>7) & 1) * 0x1b));
+        tmp3 = ((tmp3<<1) ^ (((tmp3>>7) & 1) * 0x1B));
         (ctx->state)[i][3] ^= tmp2 ^ tmp3;
     }
 }
