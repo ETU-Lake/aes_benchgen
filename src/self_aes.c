@@ -88,26 +88,26 @@ void shiftrows(aes_ctx * restrict ctx) {
     uint8_t tmp;
 
     /* 1st row 1 col to left. */
-    tmp = (ctx->state)[0][1];
-    (ctx->state)[0][1] = (ctx->state)[1][1];
-    (ctx->state)[1][1] = (ctx->state)[2][1];
-    (ctx->state)[2][1] = (ctx->state)[3][1];
-    (ctx->state)[3][1] = tmp;
+    tmp = (ctx->state)[1][0];
+    (ctx->state)[1][0] = (ctx->state)[1][1];
+    (ctx->state)[1][1] = (ctx->state)[1][2];
+    (ctx->state)[1][2] = (ctx->state)[1][3];
+    (ctx->state)[1][3] = tmp;
 
     /* Rotate 2nd row 2 col to left. */
-    tmp = (ctx->state)[0][2];
-    (ctx->state)[0][2] = (ctx->state)[2][2];
+    tmp = (ctx->state)[2][0];
+    (ctx->state)[2][0] = (ctx->state)[2][2];
     (ctx->state)[2][2] = tmp;
-    tmp = (ctx->state)[1][2];
-    (ctx->state)[1][2] = (ctx->state)[3][2];
-    (ctx->state)[3][2] = tmp;
+    tmp = (ctx->state)[2][1];
+    (ctx->state)[2][1] = (ctx->state)[2][3];
+    (ctx->state)[2][3] = tmp;
 
     /* Rotate 3rd row 3 col to left. */
-    tmp = (ctx->state)[0][3];
-    (ctx->state)[0][3] = (ctx->state)[3][3];
-    (ctx->state)[3][3] = (ctx->state)[2][3];
-    (ctx->state)[2][3] = (ctx->state)[1][3];
-    (ctx->state)[1][3] = tmp;
+    tmp = (ctx->state)[3][0];
+    (ctx->state)[3][0] = (ctx->state)[3][3];
+    (ctx->state)[3][3] = (ctx->state)[3][2];
+    (ctx->state)[3][2] = (ctx->state)[3][1];
+    (ctx->state)[3][1] = tmp;
 }
 
 void mixcolumns(aes_ctx * restrict ctx) {
