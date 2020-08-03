@@ -59,6 +59,7 @@ static void test_keyexpand(void) {
 static void test_addroundkey(aes_ctx * restrict ctx) {
     printf("Generating AddRoundKey test vector: (round = 5)\n");
     addroundkey(ctx, 5);
+    PRINT_STATE(ctx);
 }
 
 static void test_subbytes(aes_ctx * restrict ctx) {
@@ -71,15 +72,6 @@ static void test_shiftrows(aes_ctx * restrict ctx) {
     printf("Generating ShiftRows test vector:\n");
     shiftrows(ctx);
     PRINT_STATE(ctx);
-    /*
-    size_t i, j;
-    for (i = 0; i < 4; i++) {
-        for (j = 0; j < 4; j++) {
-            printf("[%zu][%zu] => %X\n", i, j, ctx->state[i][j]);
-        }
-    }
-    */
-
 }
 
 static void test_mixcolumns(aes_ctx * restrict ctx) {
