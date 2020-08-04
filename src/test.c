@@ -54,6 +54,7 @@ static void test_keyexpand(void) {
             printf("\n");
         }
     }
+    printf("\n");
 }
 
 static void test_addroundkey(aes_ctx * restrict ctx) {

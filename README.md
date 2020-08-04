@@ -4,9 +4,9 @@ Utilizes both OpenSSL and a homebrew AES adaptation of tiny-aes-c for failure-co
 run the internal test at all times.
 
 ## Building
-* `cmake -DCMAKE_BUILD_TYPE=Debug .`
+* `cmake -DCMAKE_BUILD_TYPE=Debug . && make`
     * Almost guaranteed to work and suitable for debugging.
-* `cmake -DCMAKE_BUILD_TYPE=Release .`
+* `cmake -DCMAKE_BUILD_TYPE=Release . && make`
     * Aggresive optmization but it will still work.
 
 There really isn't much point in using the `Release` build type apart from amusement. Both take almost no time to run.

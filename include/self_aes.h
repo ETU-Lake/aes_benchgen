@@ -2,6 +2,7 @@
 
 typedef struct aes_ctx__ {
     uint8_t roundkey[176];
+    /* [column][row] */
     uint8_t state[4][4];
 } aes_ctx;
 
