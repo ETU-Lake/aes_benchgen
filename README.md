@@ -22,6 +22,7 @@ Options:
   -[-s]ubbytes: generate SubBytes vectors
   -[-S]hiftrows: generate ShiftColumns vectors
   -[-m]ixcolumns: generate MixColumns vectors
+  -[-r]ound: generate 2 complete round vectors
   -[-c]ipher: generate high-level test vector
   -[-h]elp: display this message and exit
 No arguments run all tests

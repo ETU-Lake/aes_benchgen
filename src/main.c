@@ -18,6 +18,7 @@ static void help(void) {
          "  -[-s]ubbytes: generate SubBytes vectors\n"
          "  -[-S]hiftrows: generate ShiftColumns vectors\n"
          "  -[-m]ixcolumns: generate MixColumns vectors\n"
+         "  -[-r]ound: generate 2 complete round vectors\n"
          "  -[-c]ipher: generate high-level test vector\n"
          "  -[-h]elp: display this message and exit\n"
          "No arguments run all tests"
@@ -37,6 +38,7 @@ int main(int argc, char **argv) {
         { "Shiftrows",   'S', OPTPARSE_NONE },
         { "mixcolumns",  'm', OPTPARSE_NONE },
         { "cipher",      'c', OPTPARSE_NONE },
+        { "round",       'r', OPTPARSE_NONE },
         { "help",        'h', OPTPARSE_NONE },
         {0}
     };
@@ -62,6 +64,9 @@ int main(int argc, char **argv) {
             break;
         case 'm':
             mode |= MIXCOLUMNS;
+            break;
+        case 'r':
+            mode |= ROUND;
             break;
         case 'c':
             mode |= CIPHER;

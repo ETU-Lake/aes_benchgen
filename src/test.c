@@ -93,6 +93,26 @@ static void test_cipher(void) {
     printf("\n");
 }
 
+static void test_round(aes_ctx * restrict ctx) {
+    printf("Generating round vector:\n");
+
+    subbytes(ctx);
+    shiftrows(ctx);
+    mixcolumns(ctx);
+    addroundkey(ctx, 5);
+
+    printf(" * Round 5:\n");
+    PRINT_STATE(ctx);
+
+    subbytes(ctx);
+    shiftrows(ctx);
+    mixcolumns(ctx);
+    addroundkey(ctx, 6);
+
+    printf(" * Round 6:\n");
+    PRINT_STATE(ctx);
+}
+
 
 void test_eval(uint8_t opts) {
     size_t i;
@@ -135,6 +155,11 @@ void test_eval(uint8_t opts) {
     if (opts & MIXCOLUMNS) {
         self_aes_test_ctx_gen(&ctx, test_key);
         test_mixcolumns(&ctx);
+    }
+
+    if (opts & ROUND) {
+        self_aes_test_ctx_gen(&ctx, test_key);
+        test_round(&ctx);
     }
 
     if (opts & CIPHER) {

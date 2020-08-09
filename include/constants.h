@@ -10,4 +10,5 @@ enum bench_opts {
     SHIFTROWS = 0x10,
     MIXCOLUMNS = 0x20,
     CIPHER = 0x40,
+    ROUND = 0x80,
 };
